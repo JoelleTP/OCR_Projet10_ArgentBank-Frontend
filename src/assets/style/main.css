@@ -7,7 +7,10 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 0; 
+}
+
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -163,6 +166,7 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  border: none;
 }
 
 .sign-in-content {
@@ -174,9 +178,9 @@ body {
   padding: 2rem;
 }
 
-.sign-in-icon {
+/* .sign-in-icon {
   font-size: 5rem;
-}
+} */
 
 .input-remember {
   display: flex;
