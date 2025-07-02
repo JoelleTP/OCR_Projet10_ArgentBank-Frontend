@@ -3,7 +3,7 @@ import Features from "../components/Features/Features.jsx"
 
 function Home() {
     return (
-        <>
+        <main>
             <div className="hero">
                 <section className="hero-content">
                     <h2 className="sr-only">Promoted Content</h2>
@@ -24,7 +24,7 @@ function Home() {
                     />
                 ))}
             </section>      
-        </>
+        </main>
     )
 }
 
