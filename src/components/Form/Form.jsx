@@ -21,7 +21,10 @@ function Form() {
                 Remember me
             </label>
           </div>
-          <Button />
+          <Button 
+            className="sign-in-button"
+            title="Sign In"
+          />
         </form>
     )
 }
