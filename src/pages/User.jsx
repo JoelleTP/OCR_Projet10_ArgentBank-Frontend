@@ -5,14 +5,14 @@ import Account from "../components/Account/Account.jsx"
 function User() {
     return (
         <main className="main bg-dark">
-            <div class="header">
+            <div className="header">
                 <h1>Welcome back<br />Tony Jarvis!</h1>
                 <Button 
                     className="edit-button"
                     title="Edit Name"
                 />
             </div>
-            <h2 class="sr-only">Accounts</h2>
+            <h2 className="sr-only">Accounts</h2>
             {Accountdata.map(({ id, title, amount, description }) => (
                 <Account 
                     key={id}
