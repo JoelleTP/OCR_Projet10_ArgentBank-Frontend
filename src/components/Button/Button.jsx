@@ -1,6 +1,6 @@
-function Button({ className, title }) {
+function Button({ onClick, className, title }) {
     return(
-        <button type="submit" className={className}>{title}</button>
+        <button onClick={onClick} type="submit" className={className}>{title}</button>
     )
 }
 

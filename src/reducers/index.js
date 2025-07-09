@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import signInReducer from "./signIn.reducer.js"
-// import editNameReducer from "./editName.reducer"
+import userReducer from "./user.reducer.js"
 
 export const rootReducers = combineReducers({
     signInReducer,
-    // editNameReducer,
+    userReducer,
 });

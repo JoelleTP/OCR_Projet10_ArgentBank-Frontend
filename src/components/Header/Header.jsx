@@ -4,8 +4,10 @@ import { Link } from "react-router"
 import { logout } from "../../actions/signIn.action";
 import { useNavigate } from "react-router-dom"
 
+
 function Header() {
     const token = useSelector((state) => state.signInReducer.token);
+    const userData = useSelector((state) => state.userReducer.userData)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogout= () => {
@@ -24,7 +26,7 @@ function Header() {
                 </Link>
                 {token ? (
                     <div>
-                        <Link className="main-nav-item" to="/user"><i className="fa fa-user-circle"></i></Link>
+                        <Link className="main-nav-item" to="/user"><i className="fa fa-user-circle"></i>{userData.userName}</Link>
                         <Link className="main-nav-item" to="/" onClick={handleLogout}><i className="fa fa-sign-out"></i>Sign Out</Link>
                     </div>
                 ) : (

@@ -19,6 +19,7 @@ export const login = (data) => {
         }
         catch (error) {
             dispatch({ type: ERROR, payload: error.message });
+            return null
         }
     }
 }

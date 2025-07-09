@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../actions/signIn.action.js"
 import { useNavigate } from "react-router-dom"
+import { getUserData } from "../../actions/user.action.js";
 
 function Form() {
 
@@ -32,10 +33,14 @@ function Form() {
       const token = await dispatch(login(userData))
       e.target.reset();
       if(token) {
+        const userData = await dispatch(getUserData(token));
         if (remember) {
           localStorage.setItem("token", token)
+          localStorage.setItem("userData", JSON.stringify(userData))
+          console.log(userData)
         }
-        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("token", token)
+        sessionStorage.setItem("userData", JSON.stringify(userData));
         navigate('/user')
       }
     }
@@ -45,13 +50,13 @@ function Form() {
           <div className="input-wrapper">
             <label>
                 Username
-                <input type="text" id="username" />
+                <input type="email" id="username" autoComplete="username" />
             </label>
           </div>
           <div className="input-wrapper">
             <label>
                 Password
-                <input type="password" id="password" />
+                <input type="password" id="password" autoComplete="current-password" />
             </label>
           </div>
           <div className="input-remember">

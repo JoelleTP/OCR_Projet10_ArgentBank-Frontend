@@ -299,3 +299,27 @@ body {
   margin-top: 10px;
   font-weight: bold;
 }
+
+.editName_button {
+  display: flex;
+  gap: 10px;
+}
+
+.editName_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.editName_form label {
+  display: flex;
+  gap: 5px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.editName_form input {
+  padding: 5px;
+}
