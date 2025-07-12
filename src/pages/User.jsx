@@ -1,18 +1,20 @@
 import Button from "../components/Button/Button.jsx"
 import { Accountdata } from "../data/Accountdata.jsx"
-import Account from "../components/Account/Account.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { editName } from "../actions/user.action.js";
+import Account from "../components/Account/Account.jsx"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { editName } from "../app/actions/user.action.js"
 
 function User() {
     const userData = useSelector((state) => state.userReducer.userData)
-    const token = useSelector((state) => state.signInReducer.token);
+    const token = useSelector((state) => state.signInReducer.token)
     const [form, setForm] = useState(false)
     const [formError, setFormError] = useState("")
     const dispatch = useDispatch()
+
     const handleClick = () => {
         setForm(!form)
+        setFormError("")
     }
 
     const handleEditName = async (e) => {
@@ -20,11 +22,10 @@ function User() {
         const userName = e.target.username.value
         if (!userName) {
             setFormError("Veuillez compléter le User Name")
-                return
+            return
         }
         setFormError("")
         await dispatch(editName(userName, token))
-        e.target.reset();
         setForm(!form);
     }
 
@@ -36,19 +37,20 @@ function User() {
                     <form className="editName_form" onSubmit={handleEditName}>
                             <label>
                                 User name:
-                                <input type="text" id="username" defaultValue={userData.userName} />
+                                <input type="text" id="username" defaultValue={userData?.userName} />
                             </label>
                        
                         <label>
                             First name:
-                            <input type="text" id="firstname" disabled={true} defaultValue={userData.firstName} />
+                            <input type="text" id="firstname" disabled={true} defaultValue={userData?.firstName} />
                         </label>
                         <label>
                             Last name:
-                            <input type="text" id="lastname" disabled={true} defaultValue={userData.lastName} />
+                            <input type="text" id="lastname" disabled={true} defaultValue={userData?.lastName} />
                         </label>
                         <div className="editName_button">
                             <Button 
+                                type="submit"
                                 className="sign-in-button"
                                 title="Save"
                             />
@@ -67,8 +69,9 @@ function User() {
             ) : (
                 <div className="header">              
                     <h1>Welcome back<br />
-                    {userData && `${userData.firstName} ${userData.lastName}!`}</h1>
-                    <Button onClick={handleClick}
+                    {userData && `${userData?.firstName} ${userData?.lastName}!`}</h1>
+                    <Button 
+                        onClick={handleClick}
                         className="edit-button"
                         title="Edit Name"
                     />

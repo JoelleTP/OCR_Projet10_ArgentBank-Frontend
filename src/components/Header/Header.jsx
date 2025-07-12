@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../../assets/img/argentBankLogo.png"
+import logo from "../../assets/img/argentBankLogo.avif"
 import { Link } from "react-router"
-import { logout } from "../../actions/signIn.action";
+import { logout } from "../../app/actions/signIn.action";
 import { useNavigate } from "react-router-dom"
+import { deleteUserData } from "../../app/actions/user.action";
 
 
 function Header() {
@@ -10,11 +11,12 @@ function Header() {
     const userData = useSelector((state) => state.userReducer.userData)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogout= () => {
-        dispatch(logout())
-        sessionStorage.clear();
+    const handleLogout= async () => {
+        await dispatch(logout())
+        await dispatch(deleteUserData())
         localStorage.clear();
-        navigate("/login");
+        sessionStorage.clear();
+        navigate("/");
     }
 
     return (
@@ -26,7 +28,7 @@ function Header() {
                 </Link>
                 {token ? (
                     <div>
-                        <Link className="main-nav-item" to="/user"><i className="fa fa-user-circle"></i>{userData.userName}</Link>
+                        <Link className="main-nav-item" to="/user"><i className="fa fa-user-circle"></i>{userData?.userName}</Link>
                         <Link className="main-nav-item" to="/" onClick={handleLogout}><i className="fa fa-sign-out"></i>Sign Out</Link>
                     </div>
                 ) : (

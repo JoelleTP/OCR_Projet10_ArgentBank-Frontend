@@ -1,9 +1,9 @@
 import Button from "../Button/Button.jsx"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { login } from "../../actions/signIn.action.js"
+import { login } from "../../app/actions/signIn.action.js"
 import { useNavigate } from "react-router-dom"
-import { getUserData } from "../../actions/user.action.js";
+import { getUserData } from "../../app/actions/user.action.js";
 
 function Form() {
 
@@ -25,22 +25,23 @@ function Form() {
         setFormError("Veuillez compléter tous les identifiants")
         return
       }
+      const emailRegex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+");
+      if (!emailRegex.test(email)) {
+        setFormError("Veuillez entrer un email valide");
+        return;
+      }
       setFormError("")
-      const userData = {
+      const userInput = {
         email: email,
         password: password,
       }
-      const token = await dispatch(login(userData))
-      e.target.reset();
+      const token = await dispatch(login(userInput))
       if(token) {
         const userData = await dispatch(getUserData(token));
         if (remember) {
           localStorage.setItem("token", token)
           localStorage.setItem("userData", JSON.stringify(userData))
-          console.log(userData)
         }
-        sessionStorage.setItem("token", token)
-        sessionStorage.setItem("userData", JSON.stringify(userData));
         navigate('/user')
       }
     }
@@ -70,6 +71,7 @@ function Form() {
             </label>
           </div>
           <Button 
+            type="submit"
             className="sign-in-button"
             title="Sign In"
           />
@@ -80,7 +82,7 @@ function Form() {
           }
           {error &&
             <div className="error">
-              {error}
+              Identifiants inconnus
             </div>
           }
         </form>
