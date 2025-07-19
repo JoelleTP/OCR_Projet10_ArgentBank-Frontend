@@ -1,6 +1,6 @@
 import Button from "../Button/Button.jsx"
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { login } from "../../app/actions/signIn.action.js"
 import { useNavigate } from "react-router-dom"
 import { getUserData } from "../../app/actions/user.action.js";
@@ -11,7 +11,6 @@ function Form() {
     const navigate = useNavigate();
     const [remember, setRemember] = useState(false)
     const [formError, setFormError] = useState("")
-    const error = useSelector((state) => state.signInReducer.error);
 
     const checkboxChange = (e) => {
       setRemember(e.target.checked);
@@ -30,7 +29,6 @@ function Form() {
         setFormError("Veuillez entrer un email valide");
         return;
       }
-      setFormError("")
       const userInput = {
         email: email,
         password: password,
@@ -42,7 +40,10 @@ function Form() {
           localStorage.setItem("token", token)
           localStorage.setItem("userData", JSON.stringify(userData))
         }
+        setFormError("")
         navigate('/user')
+      } else {
+        setFormError("Identifiants inconnus")
       }
     }
 
@@ -78,11 +79,6 @@ function Form() {
           {formError &&
             <div className="error">
               {formError}
-            </div>
-          }
-          {error &&
-            <div className="error">
-              Identifiants inconnus
             </div>
           }
         </form>

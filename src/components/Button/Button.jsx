@@ -4,9 +4,9 @@ function Button({ onClick, type="button", className, title }) {
             onClick={onClick} 
             type={type}
             className={className}
-            >
-                {title}
-            </button>
+        >
+            {title}
+        </button>
     )
 }
 

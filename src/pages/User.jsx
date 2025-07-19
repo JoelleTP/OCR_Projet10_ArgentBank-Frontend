@@ -24,8 +24,12 @@ function User() {
             setFormError("Veuillez compléter le User Name")
             return
         }
+        const success = await dispatch(editName(userName, token))
+        if (!success) {
+            setFormError("Une erreur est survenue, veuillez réessayer")
+            return
+        }
         setFormError("")
-        await dispatch(editName(userName, token))
         setForm(!form);
     }
 
@@ -35,11 +39,10 @@ function User() {
                 <div className="header">
                     <h1>Edit user info</h1>
                     <form className="editName_form" onSubmit={handleEditName}>
-                            <label>
-                                User name:
-                                <input type="text" id="username" defaultValue={userData?.userName} />
-                            </label>
-                       
+                        <label>
+                            User name:
+                            <input type="text" id="username" defaultValue={userData?.userName} />
+                        </label>
                         <label>
                             First name:
                             <input type="text" id="firstname" disabled={true} defaultValue={userData?.firstName} />

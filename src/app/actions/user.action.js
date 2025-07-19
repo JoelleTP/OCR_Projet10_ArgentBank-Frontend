@@ -43,9 +43,11 @@ export const editName = (userName, token) => {
             });
             const data = await response.json();
             dispatch({ type: EDIT_NAME, payload: data.body });
+            return true
         }
         catch (error) {
             dispatch({ type: ERROR, payload: error.message });
+            return false
         }
     }
 }
